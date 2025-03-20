@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <body id="app">
+  <div id="app" class="min-vh-100 d-flex flex-column">
     <div>
       <!-- Search Results -->
       <div class="container">
@@ -177,7 +177,7 @@
         </div>
       </div>
     </div>
-  </body>
+  </div>
 </template>
 
 <style scoped>
@@ -186,14 +186,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-
-  .form-control {
-    width: 18em !important;
-  }
-
-  .btn {
-    width: 5em;
+    align-items: center;
   }
 
   /* Home */
@@ -224,8 +217,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
-  /* News */
+
   .news-img {
     object-fit: cover;
     width: 26em;
@@ -238,56 +230,10 @@
     height: 10em;
     margin: 1em 0;
   }
-  
-  /* Reviews */
-  .reviews-img {
-    float: left;
-    object-fit: cover;
-    width: 35em;
-    height: 20em;
-    margin: 1em;
-  }
-  
+
   .info {
     margin: 1em auto;
     text-align: center;
-  }
-  
-  /* Recommendations */
-  
-  /* Sign-In */
-  .sign-in form {
-    border: 3px solid #f1f1f1;
-  }
-  
-  input[type=text], input[type=password] {
-    width: 100%;
-    padding: 1em 1.5em;
-    margin: 1em 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  button {
-    background-color: #34568B;
-    color: white;
-    padding: 1em 1.5em;
-    margin: 1em 0;
-    width: 100%;
-  }
-  
-  button:hover {
-    opacity: 0.8;
-  }
-  
-  .sign-in  {
-    padding: 1em;
-  }
-  
-  form .container {
-    width: 50%;
-    padding: 16px;
   }
 
 </style>
