@@ -2,6 +2,7 @@
 import Header from "@/components/Header.vue";
 import Home from "@/pages/Home.vue";
 import Footer from "@/components/Footer.vue";
+import { RouterView } from "vue-router";
 
 export default {
   name: "App",
@@ -19,8 +20,7 @@ export default {
 <template>
   <div id="app" class="d-flex flex-column min-vh-100">
     <Header />
-    <!-- <router-view /> -->
-    <!-- <Home /> -->
+    <!-- <RouterView /> -->
     <Footer />
   </div>
 </template>
