@@ -7,10 +7,12 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import router from './router'
+import api from './api'
 
 
 const app = createApp(App)
 app.use(BootstrapVue3)
 app.use(router)
+// app.use(api)
 app.mount('#app')
 
