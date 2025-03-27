@@ -54,7 +54,7 @@ export default {
         </button>
 
         <form class="d-flex my-2 my-lg-0">
-            <input
+            <input style="margin: 1em 0"
               id="search-input"
                 class="form-control mx-3"
               type="search"
