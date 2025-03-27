@@ -2,23 +2,24 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 const apiKey = import.meta.env.VITE_OMDB_API_KEY;
-console.log("API Key: ", apiKey);
 
 async function getMovie(title) {
   try {
-    const response = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&t=${title}`);
+    const response = await axios.get(`https://www.omdbapi.com/?apikey=${apiKey}&t=${title}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching movie data: ", error);
     return null;
   }
 }
-
+// TODO: Refactor into a single function
 async function setFeaturedContent() {
   for (let i = 0; i < featured.value.length; i++) {
     const movieData = await getMovie(featured.value[i].title);
     if (movieData) {
+      featured.value[i].title = movieData.Title;
       featured.value[i].plot = movieData.Plot;
+      // featured.value[i].img = movieData.Poster;
     }
   }
 }
@@ -27,7 +28,9 @@ async function setNewsContent() {
   for (let i = 0; i < news.value.length; i++) {
     const movieData = await getMovie(news.value[i].title);
     if (movieData) {
+      news.value[i].title = movieData.Title;
       news.value[i].plot = movieData.Plot;
+      // news.value[i].img = movieData.Poster;
     }
   }
 }
@@ -36,8 +39,9 @@ async function setTrendingContent() {
   for (let i = 0; i < trending.value.length; i++) {
     const movieData = await getMovie(trending.value[i].title);
     if (movieData) {
+      // trending.value[i].title = movieData.Title;
       trending.value[i].plot = movieData.Plot;
-      console.log("Movie data: ", movieData.Plot);
+      // trending.value[i].img = movieData.Poster;
     }
   }
 }
@@ -55,28 +59,29 @@ const featured = ref([
   {
     title: "Dune: Part Two",
     img: "https://preview.redd.it/dune-part-two-iphone-wallpaper-v0-orsxn84894mc1.jpeg?auto=webp&s=f3816206329b51af55ee1aed59a6128dbc66194c",
+    plot: "",
   },
   {
     title: "The Batman",
     img: "https://i.redd.it/10rwnaszcpv71.jpg",
+    plot: "",
   },
   {
     title: "Free Guy",
     img: "https://www.johnmcdonald.net.au/wp-content/uploads/2021/08/Screen-Shot-2021-08-11-at-12.58.19-pm.png",
+    plot: "",
   },
 ]);
 const news = ref([
   {
-    title: "THE TRAGEDY OF MACBETH",
+    title: "The Tragedy of Macbeth",
     img: "https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/12/tragedy-of-macbeth-what-we-know.jpg",
     plot: "",
-    //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...",
   },
   {
-    title: "THE LORD OF THE RINGS: THE RINGS OF POWER",
+    title: "The Lord of the Rings: The Rings of Power",
     img: "https://www.joblo.com/wp-content/uploads/2022/02/the-lord-of-the-rings-the-rings-of-power-posters.jpg",
     plot: "",
-    //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat...",
   },
 ]);
 const trending = ref([
@@ -84,25 +89,21 @@ const trending = ref([
     title: "Spider-man: No Way Home",
     img: "https://terrigen-cdn-dev.marvel.com/content/prod/1x/snh_online_6072x9000_hero_03_opt.jpg",
     plot: ""
-      // "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
     title: "Tom and Jerry: The Movie",
     img: "https://i.pinimg.com/736x/b5/98/0e/b5980e001d4553875fa63b037c9efe66.jpg",
     plot: ""
-      // "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
     title: "Halo",
     img: "https://cdn.mos.cms.futurecdn.net/pGyDmdniqHURMK2tN3Kh56.jpg",
     plot: ""
-      // "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
   {
     title: "Peaky Blinders",
     img: "https://m.media-amazon.com/images/M/MV5BMThlOWE3MWEtZjM4Ny00M2FiLTkyMmYtZGY3ZTcyMzM5YmNlXkEyXkFqcGdeQWpnYW1i._V1_.jpg",
     plot: ""
-      // "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   },
 ]);
 </script>
@@ -154,7 +155,7 @@ const trending = ref([
             <div class="col-sm">
               <p style="font: optima; font-size: 20px">
                 <strong
-                  ><a style="color: black" href="">{{ item.title }}:</a></strong
+                  ><a style="color: black" href="">{{ item.title.toUpperCase() }}:</a></strong
                 ><span v-if="item.plot">{{ " " + item.plot }}</span>
               </p>
             </div>
